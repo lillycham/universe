@@ -1,0 +1,21 @@
+{
+  "name": "lillycat.acmeish",
+  "displayName": "Acmeish",
+  "description": "",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Themes"
+  ],
+  "contributes": {
+    "themes": [
+      {
+        "label": "Acmeish",
+        "uiTheme": "vs",
+        "path": "./themes/Acmeish-color-theme.json"
+      }
+    ]
+  }
+}

@@ -1,0 +1,52 @@
+________________________________________________________
+Executed in  763.00 micros    fish           external
+   usr time  185.00 micros    8.00 micros  177.00 micros
+   sys time  423.00 micros  104.00 micros  319.00 micros
+
+
+________________________________________________________
+Executed in  777.00 micros    fish           external
+   usr time  167.00 micros    8.00 micros  159.00 micros
+   sys time  410.00 micros  114.00 micros  296.00 micros
+
+
+________________________________________________________
+Executed in  768.00 micros    fish           external
+   usr time  175.00 micros    8.00 micros  167.00 micros
+   sys time  442.00 micros  119.00 micros  323.00 micros
+
+
+________________________________________________________
+Executed in  720.00 micros    fish           external
+   usr time  161.00 micros    7.00 micros  154.00 micros
+   sys time  416.00 micros  105.00 micros  311.00 micros
+
+
+________________________________________________________
+Executed in  689.00 micros    fish           external
+   usr time  161.00 micros    7.00 micros  154.00 micros
+   sys time  395.00 micros  101.00 micros  294.00 micros
+
+
+________________________________________________________
+Executed in  717.00 micros    fish           external
+   usr time  165.00 micros    7.00 micros  158.00 micros
+   sys time  410.00 micros  106.00 micros  304.00 micros
+
+
+________________________________________________________
+Executed in  706.00 micros    fish           external
+   usr time  168.00 micros    8.00 micros  160.00 micros
+   sys time  409.00 micros  104.00 micros  305.00 micros
+
+
+________________________________________________________
+Executed in  718.00 micros    fish           external
+   usr time  174.00 micros    8.00 micros  166.00 micros
+   sys time  397.00 micros  106.00 micros  291.00 micros
+
+
+________________________________________________________
+Executed in  701.00 micros    fish           external
+   usr time  166.00 micros    9.00 micros  157.00 micros
+   sys time  405.00 micros  121.00 micros  284.00 micros
