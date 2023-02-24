@@ -25,7 +25,7 @@ class Node {
     counter = 500;
     visited = 0;
 
-    constructor(coords: Coords, contents: any, color: string, font: string, fg: string) {
+    constructor(coords: Coords, contents: string, color: string, font: string, fg: string) {
         this.coords = coords;
         this.contents = contents;
         this.fill = color;
@@ -119,7 +119,8 @@ const drawGraphSim = (props: CanvasProps, canvas: HTMLCanvasElement) => {
     });
     return nodes;
 };
-const animateGraphSim = (props: CanvasProps, canvas: HTMLCanvasElement, nodes: Node[], start: string) => {
+
+const animateGraphSim = (canvas: HTMLCanvasElement, nodes: Node[], start: string) => {
     const ctx = canvas.getContext('2d')!;
     // Awful hack
     let timeout = 500;
@@ -132,7 +133,8 @@ const animateGraphSim = (props: CanvasProps, canvas: HTMLCanvasElement, nodes: N
             }, timeout);
             console.log(node);
             timeout += 500;
-        });
+        }
+        );
     }, 300);
 };
 
@@ -163,8 +165,4 @@ const nodes = drawGraphSim({
 }, canvas);
 
 // On click, start sim
-button.addEventListener('click', (_) => animateGraphSim({
-    graph: aGraph,
-    width: width,
-    height: height
-}, canvas, nodes, start + ''));
+button.addEventListener('click', (_) => animateGraphSim(canvas, nodes, start + ''));

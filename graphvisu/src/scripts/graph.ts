@@ -19,6 +19,7 @@ export default class Graph {
         this.adjacents = {};
         this.edges = 0;
     }
+
     /**
      * add 1 or many vertices to the graph.
      * a vertex is a "node".
@@ -31,6 +32,7 @@ export default class Graph {
             this.adjacents[v] = [];
         });
     }
+
     /**
      * variadic form of addEdge.
      * @param es - An array of pairs, where each pair represents a connection between two vertices.
@@ -41,6 +43,7 @@ export default class Graph {
             this.addEdge(v, w);
         }));
     }
+
     /**
      * connect 2 vertices together.
      *
@@ -52,6 +55,7 @@ export default class Graph {
         this.adjacents[w].push(v);
         this.edges++;
     }
+
     /**
      * Depth First Search/Traversal.
      *
