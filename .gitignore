@@ -24,3 +24,6 @@ lerna-debug.log*
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+**/*.cpython*
+**/__pycache__
