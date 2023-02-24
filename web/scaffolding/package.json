@@ -1,0 +1,12 @@
+{
+  "name": "name",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "author": "Lilly Cham",
+  "license": "MIT",
+  "devDependencies": {
+    "esbuild": "^0.17.10",
+    "typescript": "^4.9.5",
+    "vite": "^4.1.4"
+  }
+}

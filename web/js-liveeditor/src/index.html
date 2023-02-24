@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="./style.css">
+	<script src="./index.ts" type="module" defer="true"></script>
+	<title>Live Editor</title>
+</head>
+
+<body>
+	<div id="top-container" class="top">
+		<div id="editor" class="editor">
+			<h2>JavaScript:</h2>
+			<textarea name="js-editor" id="editor-ta-js" cols="80" rows="10" aria-label="editor-text-field"></textarea>
+			<h2>HTML:</h2>
+			<textarea name="html-editor" id="editor-ta-html" cols="80" rows="10" aria-label="editor-text-field"></textarea>
+			<h2>CSS:</h2>
+			<textarea name="css-editor" id="editor-ta-css" cols="80" rows="10" aria-label="editor-text-field"></textarea>
+			<br />
+			<h2>Console</h2>
+			<div class="logger" id="logger"></div>
+		</div>
+		<div id="output">
+			<!-- <div class="title-container">
+				<h2 class="title">Output</h2>
+			</div>
+			<div class="break"></div> -->
+			<div class="iframe-container">
+				<iframe id="preview-embed" title="preview window" class="preview-frame" scrolling="no"></iframe>
+			</div>
+			<div id="logger-root" class="logger">
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
