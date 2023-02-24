@@ -1,0 +1,12 @@
+name:              agda-utils
+version:           v0.0.1
+author:            Lilly Cham
+category:          cat1, cat2, cat3
+homepage:          http://github.com/lillycat332/universe/tree/main/agda/agda-utils
+license:           MIT
+license-file:      LICENSE.md
+source-repository: http://github.com/lillycat332/universe/tree/main/agda/agda-utils
+tested-with:       2.6.0
+description:       Simple agda utility functions
+
+include:           src

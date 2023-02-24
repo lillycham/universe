@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//  doll
+//  ragdoll
 //
 //  Created by Lilly Cham on 20/02/2023.
 //
@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-const std::string prog_name = "doll";
+const std::string prog_name = "ragdoll";
 
 void err_exit(std::string message, int code = EXIT_FAILURE) {
   std::cerr << prog_name << ": " << message;
@@ -26,10 +26,12 @@ int main(int argc, const char * argv[]) {
   std::ios_base::sync_with_stdio(false);
   
   std::vector<std::string> argvec(argv + 1, argv + argc);
+  
   if (argc < 2) {
     cat(std::cin);
     exit(EXIT_SUCCESS);
   }
+  
   for (std::string name : argvec) {
     std::ifstream file;
     try {

@@ -1,0 +1,3 @@
+name:    agda-utils
+depend:  standard-library
+include: src
