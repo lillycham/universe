@@ -24,7 +24,14 @@ class Array(object):
 			raise ArrayException("Index "+str(n)+" out of bounds.")
 		return self.__array[n]
 
-	def assign(self, n : int, value : Any) -> None:
+	# added by me :)
+	def __getitem__(self, n: int) -> Any:
+		return self.get(n)
+
+	def __setitem__(self, n:int, value: Any) -> None:
+		return self.assign(n, value)
+
+	def assign(self, n : int, value: Any) -> None:
 		"""Sets element n to value"""
 		if n>= self.__size or n<0:
 			raise ArrayException("Index "+str(n)+" out of bounds.")

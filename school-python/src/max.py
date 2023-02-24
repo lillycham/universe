@@ -1,5 +1,4 @@
 alist = ["cat","dog","aaaaaa","verylongword"]
-#print(max(alist))
 
 def longestWord(alist):
 	max_len = -1

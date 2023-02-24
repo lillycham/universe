@@ -7,7 +7,6 @@ import time;from typing import *;from os import system, name;from pyfiglet impor
 	 - Implement saving to disk using Pickle 💾
 """
 
-
 class page():
 	"""
 	This is the page dataclass that is used to hold the data of each page.

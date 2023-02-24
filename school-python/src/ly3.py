@@ -9,16 +9,8 @@ def findLeapYearRange(year1 : int, year2 : int) -> None:
     if findLeapYear(y):
       print(y);
 
-
-
-
-
-LeapYear : int = int(input("Input the year you want to check: "))
+LeapYear = int(input("Input the year you want to check: "))
 print(findLeapYear(LeapYear))
-
-
 LeapYear1 = int(input("Input the year you want to check: "))
-
 LeapYear2 = int(input("Input the second year you want to check: "))
-
 findLeapYearRange(LeapYear1, LeapYear2)

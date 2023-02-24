@@ -1,12 +1,11 @@
-def BinaryToDecimal(binary):
-    decimal = 0 
-    count = 0 
-    while binary: 
+def bin_to_dec(binary):
+    decimal = 0
+    for i in range(binary): 
         digit = binary % 10 
-        decimal = decimal + digit * pow(2 , count)
+        decimal = decimal + digit * pow(2 , i)
         binary = binary//10 
-        count += 1              
     return decimal
-binary = int(input("Enter a binary number: "))
-print(BinaryToDecimal(binary))
+
+print(bin_to_dec(int(input("Enter a binary number: "))))
+
 

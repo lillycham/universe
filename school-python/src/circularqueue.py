@@ -36,18 +36,16 @@ class circularQueue():
     def printqueue(self):
         for i in range(0, self.__queue.getSize() - 1):
             print(self.__queue.get(i))
- 
-class circApp():
-    def main():
-        queue = circularQueue(8)
-        while True:
-            inputStr = input("Please enter a thing to add to the queue, or nothing to dequeue: ")
-            if inputStr != "":
-                queue.enqueue(inputStr)
-                queue.printqueue()
-            else:
-                queue.dequeue()
-                queue.printqueue()
-               
- 
-circApp.main()
+
+def main():
+    queue = circularQueue(8)
+    while True:
+        inputStr = input("Please enter a thing to add to the queue, or nothing to dequeue: ")
+        if inputStr != "":
+            queue.enqueue(inputStr)
+            queue.printqueue()
+        else:
+            queue.dequeue()
+            queue.printqueue()
+
+if __name__ == '__main__': main()
