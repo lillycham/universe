@@ -1,0 +1,26 @@
+/Volumes/cs/Programming/C/k+r/ch1/1.10
+/mnt/font/GoMono/15a/font
+/nix/store/d2zsxhlwhzx0y9cnmmdhppkqmq0xsrdi-plan9port-2021-10-19/plan9/font/lucm/unicode.9.font
+  0.0000000  69.2514970
+w win Newcol Kill Putall Dump Exit Dump /Volumes/cs/Programming/C/k+r/acme.dump 
+c          0 New Cut Paste Snarf Sort Zerox Delcol
+c          1 New Cut Paste Snarf Sort Zerox Delcol win rc
+f          0           7         571         571   2.1678710 
+          7          87         773           0           0 /Volumes/cs/Programming/C/k+r/ch1/1.10/longest-line.c Del Snarf | Look printf Indent ON
+f          1           4           0           0   2.1678710 
+          4          60          15           1           0 /Volumes/cs/Programming/C/k+r/ch1/1.1/ Del Snarf Get | Look 
+e          1           0           0           0   4.3357421 
+         14          67        1759           0           1 /Volumes/cs/Programming/C/k+r/ch2/2.3/-mirai Del Snarf | Look  Send
+/Volumes/cs/Programming/C/k+r/
+win rc
+F          1           2          54          54  35.9088382          54 
+         22          64          54           0           0 /Volumes/cs/Programming/C/k+r/ch1/1.10/+Errors Del Snarf | Look 
+s/parenCount/p/g: No such file or directory
+g: exit 1
+F          1           3          46          63  68.1489717          63 
+         24          25          63           0           0 +Errors Del Snarf | Look 
+Edit: bad delimiter n
+
+Edit: bad delimiter n
+
+Edit: no address
