@@ -1,3 +1,3 @@
 # lilswiftlib
 
-A description of this package.
+lilly's swift library
