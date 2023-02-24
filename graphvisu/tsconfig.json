@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    /* Visit https://aka.ms/tsconfig to read more about this file */
+    /* Projects */
+    "incremental": true, /* Save .tsbuildinfo files to allow for incremental compilation of projects. */
+    "target": "ESNext", /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    /* Modules */
+    "module": "ESNext", /* Specify what module code is generated. */
+    "esModuleInterop": true, /* Emit additional JavaScript to ease support for importing CommonJS modules. This enables 'allowSyntheticDefaultImports' for type compatibility. */
+    // "preserveSymlinks": true,                         /* Disable resolving symlinks to their realpath. This correlates to the same flag in node. */
+    "forceConsistentCasingInFileNames": true, /* Ensure that casing is correct in imports. */
+    /* Type Checking */
+    "strict": true, /* Enable all strict type-checking options. */
+    "strictNullChecks": true, /* When type checking, take into account 'null' and 'undefined'. */
+    "strictFunctionTypes": true, /* When assigning functions, check to ensure parameters and the return values are subtype-compatible. */
+    "strictBindCallApply": true, /* Check that the arguments for 'bind', 'call', and 'apply' methods match the original function. */
+    "strictPropertyInitialization": true, /* Check for class properties that are declared but not set in the constructor. */
+    "noImplicitThis": true, /* Enable error reporting when 'this' is given the type 'any'. */
+    "useUnknownInCatchVariables": true, /* Default catch clause variables as 'unknown' instead of 'any'. */
+    "skipLibCheck": true, /* Skip type checking all .d.ts files. */
+    "rootDir": "./src/scripts",
+    "outDir": "./dist",
+  },
+  "exclude": [
+    "vite.config.ts",
+    "assets/*"
+  ]
+}

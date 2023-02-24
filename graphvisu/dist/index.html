@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<meta name="theme-color" content="#3873cb" />
+	<title>Graph Traversal Visualiser</title>
+	<script defer="defer" type="module">
+		// Adapted from MDN
+		/**
+		 * Returns a random number (which can be a float) between `min` (inclusive) and `max` (exclusive)
+		 *
+		 * @param min minimum inclusive number
+		 * @param max maximum inclusive number
+		 */
+		export function getRandomArbitrary(min, max) {
+			return Math.random() * (max - min) + min;
+		}
+		/**
+		 * Returns a random integer between `min` (inclusive) and `max` (inclusive).
+		 *
+		 * The value is no lower than `min` (or the next integer greater than `min`
+		 * if `min` isn't an integer) and no greater than `max` (or the next integer
+		 * lower than `max` if `max` isn't an integer).
+		 *
+		 * @param min minimum inclusive number
+		 * @param max maxmimum inclusive number
+		 * @returns a random number between min and max
+		 */
+		export function getRandomInt(min, max) {
+			min = Math.ceil(min);
+			max = Math.floor(max);
+			return Math.floor(Math.random() * (max - min + 1)) + min;
+		}
+
+		/**
+		 * A structure representing a generic graph.
+		 *
+		 * It uses an adjacency list internally.
+		 *
+		 * To instantiate, call `new Graph()`
+		 *
+		 * Vertices can be added with `.addVtx` or `.addVertices`
+		 */
+		export default class Graph {
+			vertices;
+			adjacents;
+			edges;
+			/**
+			 * Instantiate an empty Graph.
+			 */
+			constructor() {
+				this.vertices = [];
+				this.adjacents = {};
+				this.edges = 0;
+			}
+			/**
+			 * add 1 or many vertices to the graph.
+			 * a vertex is a "node".
+			 * @param vs - A list of vertices
+			 */
+			addVertices(...vs) {
+				vs.forEach((v) => {
+					this.vertices.push(v);
+					// @ts-ignore
+					this.adjacents[v] = [];
+				});
+			}
+
+			/**
+			 * variadic form of addEdge.
+			 * @param es - An array of pairs, where each pair represents a connection between two vertices.
+			 */
+			addEdges(...es) {
+				es.forEach((e => {
+					const [v, w] = e;
+					this.addEdge(v, w);
+				}));
+			}
+			/**
+			 * connect 2 vertices together.
+			 *
+			 * @param v the first vertex
+			 * @param w the vertex to connect v to
+			 */
+			addEdge(v, w) {
+				this.adjacents[v].push(w);
+				this.adjacents[w].push(v);
+				this.edges++;
+			}
+			/**
+			 * Depth First Search/Traversal.
+			 *
+			 * Traverse through a graph, returning `true` if the value `goal` is in the graph.
+			 *
+			 * @param goal What we're looking for
+			 * @param v - the starting node, defaulting to the 0th node in the alist
+			 * @param fn - the updating function to call, used for visualisation
+			 * @param visited - Tracks visited nodes, used in recursive calls.
+			 * @returns A boolean indicating whether `goal` is in the graph
+			 */
+			dfs(goal, v = this.vertices[0], fn, visited = {}) {
+				let adj = this.adjacents;
+				visited[v] = true;
+				if ((!visited[v] && v !== goal))
+					if (fn !== null)
+						fn(this, v);
+				for (let i = 0; i < (adj[v]?.length ?? 0); i++) {
+					let w = adj[v][i];
+					if (!visited[w])
+						this.dfs(goal, w, fn, visited);
+					if (fn !== null)
+						fn(this, v);
+				}
+				return visited[goal] || false;
+			}
+		}
+
+
+		// Instantiate our graph and add connections between nodes
+		const aGraph = new Graph();
+		aGraph.addVertices('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+		aGraph.addEdges(['0', '1'], ['1', '2'], ['1', '3'], ['1', '7'], ['3', '4'], ['4', '7'], ['5', '1'], ['6', '9'], ['7', '9'], ['8', '9']);
+		aGraph.dfs('d', 'a', (g, n) => console.log(g, n));
+		/**
+		 * Container class abstracting the rendering of graph vertices and edges
+		 */
+		class Node {
+			coords;
+			contents;
+			fill;
+			fg;
+			font;
+			counter = 500;
+			visited = 0;
+			constructor(coords, contents, color, font, fg) {
+				this.coords = coords;
+				this.contents = contents;
+				this.fill = color;
+				this.font = font;
+				this.fg = fg;
+			}
+			draw(ctx, color = this.fill) {
+				const { x, y } = this.coords;
+				ctx.fillStyle = color;
+				ctx.beginPath();
+				ctx.arc(x, y, 20, 0, 2 * Math.PI);
+				ctx.fill();
+				ctx.closePath();
+				this.relabel(ctx);
+			}
+			relabel(ctx) {
+				const { x, y } = this.coords;
+				ctx.fillStyle = this.fg;
+				ctx.font = this.font;
+				ctx.fillText(this.contents, x, y);
+				ctx.fillStyle = this.fill;
+			}
+			connect(ctx, other) {
+				const { x, y } = this.coords;
+				const ox = other.coords.x;
+				const oy = other.coords.y;
+				ctx.fillStyle = this.fill;
+				ctx.beginPath();
+				ctx.moveTo(x, y);
+				ctx.lineTo(ox, oy);
+				ctx.lineWidth = 2.5;
+				ctx.stroke();
+				ctx.closePath();
+				this.relabel(ctx);
+			}
+			redraw(ctx) {
+				const cols = {
+					0: 'red',
+					1: 'orange',
+					2: 'green',
+					3: 'blue',
+					4: 'indigo',
+					5: 'violet',
+				};
+				const num = this.visited > 5 ? 0 : this.visited;
+				this.draw(ctx, cols[num]);
+				this.visited += 1;
+			}
+		}
+		const drawGraphSim = (props, canvas) => {
+			let nodes = [];
+			// Get a context, force unwrap it because if we can't get one then everything is FUBAR anway
+			const ctx = canvas.getContext('2d');
+			// Make it look nicer
+			ctx.imageSmoothingEnabled = true;
+			ctx.imageSmoothingQuality = 'high';
+			// Draw initial canvas BG
+			ctx.fillStyle = '#ffffff';
+			ctx.fillRect(0, 0, props.width, props.height);
+			// Populate the list of graph nodes w/new nodes
+			for (const node of props.graph.vertices) {
+				const coords = { x: getRandomInt(0, props.height - 150), y: getRandomInt(0, props.height - 150) };
+				const gNode = new Node(coords, node, '#ffb6c1', '1.5em monospace', '#ffffff');
+				nodes.push(gNode);
+			}
+			// draw the lines between nodes
+			nodes.forEach(node => {
+				// Connect adjacent nodes
+				nodes.forEach(other => {
+					if (new Set(aGraph.adjacents[node.contents]).has(other.contents)) {
+						node.connect(ctx, other);
+						// Draw the text back on so it doesn't get covered up.
+						node.relabel(ctx);
+					}
+				});
+			});
+			// draw the lines between nodes
+			nodes.forEach(node => {
+				node.draw(ctx);
+			});
+			return nodes;
+		};
+		const animateGraphSim = (props, canvas, nodes, start) => {
+			const ctx = canvas.getContext('2d');
+			// Awful hack
+			let timeout = 500;
+			setTimeout((_) => {
+				aGraph.dfs(start, start, (_, n) => {
+					console.log(n);
+					const node = nodes.filter((node) => node.contents == n)[0];
+					setTimeout(() => {
+						node?.redraw(ctx);
+					}, timeout);
+					console.log(node);
+					timeout += 500;
+				});
+			}, 300);
+		};
+		let height = 1024;
+		let width = 1024;
+		// Get handles to html elements and apply attributes
+		const canvas = document.getElementById('graph');
+		canvas.setAttribute('width', height + '');
+		canvas.setAttribute('height', width + '');
+		canvas.replaceWith(canvas);
+		const button = document.getElementById('render-button');
+		const input = document.getElementById('start-sel');
+		let start = 0;
+		input.onchange = (ev) => {
+			//@ts-ignore
+			start = ev.target?.value ?? 0;
+		};
+		// Draw the graph and get the node list
+		const nodes = drawGraphSim({
+			graph: aGraph,
+			width: width,
+			height: height
+		}, canvas);
+		// On click, start sim
+		button.addEventListener('click', (_) => animateGraphSim({
+			graph: aGraph,
+			width: width,
+			height: height
+		}, canvas, nodes, start + ''));
+
+	</script>
+	<link defer="defer" rel="stylesheet" href="./styles/style.css">
+</head>
+
+<body><noscript>You need to enable JavaScript to run this app.</noscript>
+	<div id="root">
+		<h1>Depth First Search Visualiser</h1>
+
+		<!-- <h3>(if the graph is cluttered reload - the positions are random)</h3> -->
+		<div class="flex-container">
+			<canvas id="graph" class="flex-item"></canvas>
+			<section id="controls" class="flex-item">
+				<section id="controls-inputs-vtx" class="controls-vtx">
+					<label for="start-sel" class="vtx-label">Vertex to start at (0-9)</label>
+					<br>
+					<input id="start-sel" type="number" class="vtx-field">
+					<button id="render-button" type="button" class="render-button">Draw!</button>
+				</section>
+				<h3>Adjacency list:</h3>
+				<ul>
+					<li>0 : 1</li>
+					<li>1 : 2</li>
+					<li>1 : 3</li>
+					<li>1 : 7</li>
+					<li>3 : 4</li>
+					<li>4 : 7</li>
+					<li>5 : 1</li>
+					<li>6 : 9</li>
+					<li>7 : 9</li>
+					<li>8 : 9</li>
+				</ul>
+			</section>
+		</div>
+	</div>
+</body>
+
+</html>
