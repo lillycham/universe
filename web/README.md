@@ -1,0 +1,3 @@
+# Web Projects
+
+This directory contains web-based projects - JS, HTML, ...
