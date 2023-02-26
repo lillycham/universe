@@ -30,7 +30,6 @@ library
       Data.Map.Base
       Data.Map.Operations
       Data.Map.Pretty
-      Lib
   other-modules:
       Paths_lredis
   hs-source-dirs:
