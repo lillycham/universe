@@ -21,6 +21,11 @@ description:         Please see the README on GitHub at <https://github.com/gith
 
 dependencies:
 - base >= 4.7 && < 5
+- network
+- bytestring
+- text
+- async
+- hspec
 
 ghc-options:
 - -Wall
@@ -54,6 +59,7 @@ tests:
     ghc-options:
     - -threaded
     - -rtsopts
+    - -Wno-missing-export-lists
     - -with-rtsopts=-N
     dependencies:
     - lredis
