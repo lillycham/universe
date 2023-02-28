@@ -26,6 +26,8 @@ dependencies:
 - text
 - async
 - hspec
+- QuickCheck
+- prettyprinter
 
 ghc-options:
 - -Wall
