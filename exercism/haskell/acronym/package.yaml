@@ -3,16 +3,16 @@ version: 1.7.0.11
 
 dependencies:
   - base
-  - text
+  - split
+  - regex-compat
 
 library:
   exposed-modules: Acronym
   source-dirs: src
   ghc-options: -Wall
-  dependencies:
-    - split
-    - text
-
+  dependencies: regex-compat
+  # - foo       # List here the packages you
+  # - bar       # want to use in your solution.
 
 tests:
   test:
@@ -21,4 +21,3 @@ tests:
     dependencies:
       - acronym
       - hspec
-      

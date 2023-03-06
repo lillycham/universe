@@ -43,3 +43,9 @@
 # Exercism
 **/.exercism
 **/.stack-work
+/exercism/pharo-smalltalk/pharo-ui
+/exercism/pharo-smalltalk/pharo-vm/
+/exercism/pharo-smalltalk/pharo-local/
+/exercism/pharo-smalltalk/Pharo10.0-64bit-2314c3f.sources
+/exercism/pharo-smalltalk/Pharo.changes
+/exercism/pharo-smalltalk/Pharo.image
