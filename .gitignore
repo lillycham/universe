@@ -49,3 +49,6 @@
 /exercism/pharo-smalltalk/Pharo10.0-64bit-2314c3f.sources
 /exercism/pharo-smalltalk/Pharo.changes
 /exercism/pharo-smalltalk/Pharo.image
+exercism/c/**/test-framework/
+exercism/go/**/*_test.go
+exercism/rust/**/tests/
