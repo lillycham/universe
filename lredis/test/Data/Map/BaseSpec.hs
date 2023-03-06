@@ -65,6 +65,12 @@ genBranch =
   arbitrary >>= \v ->
   pure $ Branch k v Empty Empty
 
+genPair :: Arbitrary a => Gen (a, a)
+genPair = do
+  a <- arbitrary
+  b <- arbitrary
+  pure (a, b)
+
 genSmallerThan n = arbitrary `suchThat` (n >)
 genGreaterThan n = arbitrary `suchThat` (n <)
 
@@ -87,28 +93,32 @@ spec = do
       (monoidLeftIdProp :: BSTree Int Int -> Bool)
   describe "Searching" do
     prop "can be searched by key" $
-      forAll (genTreeWith' :: Gen ((BSTree Int Int), Int)) \(t,k) ->
-        (t ! k) /= Nothing
-      -- k `isin` t
+      forAll (genTreeWith' :: Gen ((BSTree Int Int), Int))
+      \(t,k) -> (t ! k) /= Nothing
     prop "missing keys give Nothing" $
-      forAll (genTreeWithout' :: Gen ((BSTree Int Int), Int)) \(t,k) ->
-        t ! k == Nothing
-    it "missing values give Nothing" $
-      (searchV "d" testTree) `shouldBe` (Nothing)
-    it "can be searched in ranges" $
-      ((getRange 0 3 testTree) \\ ["a","b","c"]) `shouldBe` []
+      forAll (genTreeWithout' :: Gen ((BSTree Int Int), Int))
+      \(t,k) -> t ! k == Nothing
+    prop "missing values give Nothing" $
+      forAll (genTreeWithout' :: Gen ((BSTree Int Int), Int))
+      \(t,k) -> (searchV "d" testTree) == Nothing
+    prop "can be searched in ranges" $
+      forAll (orderedList :: Gen [(Int, Int)])
+      \xs -> let f   = fst $ head xs
+                 l   = fst $ last xs
+                 xs' = snd <$> xs
+                 xt  = fromList xs in
+        (getRange f l xt) \\ xs' == []
   describe "insertion" do
     it "keys can be overridden" $
       (create 0 "a" |> insert 0 "b") `shouldBe`
       (create 0 "b")
-    it "inserts smaller keys on left" $
-      forAll (genBranch :: Gen (BSTree Int Int)) \t@(Branch k v _ r) ->
-        forAll (genSmallerThan k) \k' ->
-          forAll (arbitrary :: Gen Int) \v ->
-            let new = create k' v in (insert k' v t) == (Branch k v new r)
-      -- (create 1 "a" |> insert 0 "b") `shouldBe`
-      -- (Branch 1 "a" (Branch 0 "b" Empty Empty) Empty)
-    it "inserts bigger values on right" $
-      (create 0 "a" |> insert 1 "b") `shouldBe`
-      (Branch 0 "a" Empty (Branch 1 "b" Empty Empty))
-    
+    prop "inserts smaller keys on left" $
+      forAll (genBranch :: Gen (BSTree Int Int))
+      \t@(Branch k v l r) -> forAll (genSmallerThan k)
+      \k' -> forAll (arbitrary :: Gen Int)
+      \v' -> (insert k' v' t |> left) == create k' v'
+    prop "inserts bigger values on right" $
+      forAll (genBranch :: Gen (BSTree Int Int))
+      \t@(Branch k _ _ _) -> forAll (genGreaterThan k)
+      \k' -> forAll (arbitrary :: Gen Int)
+      \v' -> (insert k' v' t |> right) == create k' v'

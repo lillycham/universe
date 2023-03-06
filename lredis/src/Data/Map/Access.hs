@@ -1,4 +1,4 @@
-module Data.Map.Access where
+module Data.Map.Access (left, right, key) where
 import Data.Map.Base (BSTree (Branch, Empty))
 -- Accessors
 left :: BSTree k v -> BSTree k v
